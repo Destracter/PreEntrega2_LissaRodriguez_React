@@ -11,8 +11,13 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import CartWidget from '../CartWidget/CartWidget';
+import { NavLink } from 'react-router-dom';
 
-const pages = ['PC', 'Portatiles', 'Celulares'];
+const pages = [
+  { name: 'PC', id: 'pc' },
+  { name: 'Portatiles', id: 'portatiles' },
+  { name: 'Celulares', id: 'celulares' },
+];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -33,8 +38,7 @@ function ResponsiveAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component="div"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -45,7 +49,9 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            SabaleTech
+            <NavLink to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <h2>SabaleTech</h2>
+            </NavLink>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -76,8 +82,12 @@ function ResponsiveAppBar() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                <MenuItem key={page.id} onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>
+                    <NavLink to={`/category/${page.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      {page.name}
+                    </NavLink>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -86,8 +96,7 @@ function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component="div"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -99,21 +108,25 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            SabaleTech
+            <NavLink to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <h2>SabaleTech</h2>
+            </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.id}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <NavLink to={`/category/${page.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+                  {page.name}
+                </NavLink>
               </Button>
             ))}
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <CartWidget /> 
+            <CartWidget />
           </Box>
         </Toolbar>
       </Container>
@@ -122,7 +135,4 @@ function ResponsiveAppBar() {
 }
 
 export default ResponsiveAppBar;
-
-
-
 
